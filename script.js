@@ -2,31 +2,24 @@ const getSumBtn = document.createElement("button");
 getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
-let table = document.getElementById("table");
-
 const getSum = () => {
-    let allPrices = document.querySelectorAll("td[class = price]");
-    
-    
-    let sum = 0;
+const table = document.querySelector('table');
+const prices = document.querySelectorAll('.price');
 
-    for(let i= 0; i < allPrices.length; i++){
-        sum = sum + parseInt(allPrices[i].innerHTML.trim());
+let totalPrice = 0;
+for (let i = 0; i < prices.length; i++) {
+  totalPrice += parseFloat(prices[i].innerText);
+}
 
-    }
+const newRow = document.createElement('tr');
+const totalCell = document.createElement('td');
+	totalCell.id="ans";
+totalCell.setAttribute('colspan', '2');
+totalCell.innerText = 'Total Price: ' + totalPrice.toFixed(2); // Format the total price with 2 decimal places
 
-    let newRow = document.createElement("tr");
-	 newRow.setAttribute("id", "ans");
-    let cell1 = document.createElement("td");
-    cell1.textContent = "Total is :";
-    let cell2 = document.createElement("td");
-    cell2.textContent = sum;
+newRow.appendChild(totalCell);
+table.appendChild(newRow);
 
-    newRow.appendChild(cell1);
-    newRow.appendChild(cell2);
-
-    table.appendChild(newRow);
-  
-};
+	};
 
 getSumBtn.addEventListener("click", getSum);
